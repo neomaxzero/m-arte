@@ -13,3 +13,13 @@
 .bg--primary {
   background-color: var(--color-primary);
 }
+
+.hide {
+  display: none;
+}
+
+.art-show {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--size-4);
+}
