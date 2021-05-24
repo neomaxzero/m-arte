@@ -1,0 +1,15 @@
+@import './reset.scss';
+@import './constants.scss';
+
+.container {
+  margin: 0 auto;
+  max-width: var(--viewport-desktop);
+}
+
+.p--4 {
+  padding: var(--size-4);
+}
+
+.bg--primary {
+  background-color: var(--color-primary);
+}
