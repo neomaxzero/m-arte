@@ -1,33 +1,26 @@
+import { publish, subscribe } from './core/pubSub';
 import { getArtworks } from '../repository/artwork';
 import renderArt from './art';
 import { componentFactory } from './core';
+import { GET_MORE_DATA, GET_MORE_DATA_DONE } from './events/constants';
 
 const artgrid = (el) => {
+  subscribe(GET_MORE_DATA, getData);
+
   async function getData() {
-    setLoader(true);
     const { error, data, errorMsg } = await getArtworks();
-    console.log(data);
+
+    publish(GET_MORE_DATA_DONE);
+
     if (error) {
       showError(errorMsg);
     }
 
-    setLoader(false);
+    const imgBaseUrl = data.config.iiif_url;
 
-    const cards = data.data.map(renderArt);
-    console.log(cards);
+    const cardArts = data.data.map((artData) => renderArt(artData, imgBaseUrl));
 
-    el.innerHTML = cards.join('');
-  }
-
-  function setLoader(show) {
-    const hideClass = 'hide';
-    const loaderEl = document.querySelector('.js-loader');
-
-    if (show) {
-      loaderEl.classList.remove(hideClass);
-    } else {
-      loaderEl.classList.add(hideClass);
-    }
+    cardArts.forEach((artEl) => el.appendChild(artEl));
   }
 
   function showError(errorMsg) {}

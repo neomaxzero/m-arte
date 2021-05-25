@@ -1,8 +1,14 @@
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
 :root {
   --color-primary: #f1c40f;
-  --viewport-desktop: '1024px';
+  --color-secondary: #2ecc71;
+  --color-secondary-dark: #27ae60;
   --size-base: 4px;
   --size-1: calc(var(--size-base) * 1);
   --size-2: calc(var(--size-base) * 2);
   --size-4: calc(var(--size-base) * 4);
+  --viewport-tablet: $bp-tablet;
+  --viewport-desktop: $bp-desktop;
 }

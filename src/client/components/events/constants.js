@@ -1,0 +1,2 @@
+export const GET_MORE_DATA = 'GET_MORE_DATA';
+export const GET_MORE_DATA_DONE = 'GET_MORE_DATA_DONE';
