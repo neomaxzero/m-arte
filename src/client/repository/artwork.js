@@ -5,17 +5,17 @@ const BASE_API = 'https://api.artic.edu/api/v1';
 const artworkUrl = (page = 1) =>
   `${BASE_API}/artworks?fields=id,title,image_id,color&page=${page}`;
 
-// export const getArtworks = async () => {
-//   const WAITING_TIME = 300;
+export const getArtworksSample = async () => {
+  const WAITING_TIME = 300;
 
-//   return new Promise((resolve) => {
-//     function getSample() {
-//       resolve(sampleArt);
-//     }
+  return new Promise((resolve) => {
+    function getSample() {
+      resolve(sampleArt);
+    }
 
-//     setTimeout(getSample, WAITING_TIME);
-//   });
-// };
+    setTimeout(getSample, WAITING_TIME);
+  });
+};
 
 export const getArtworks = async (page) => {
   const result = {
