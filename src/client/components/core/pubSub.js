@@ -7,9 +7,6 @@ export const subscribe = (topic, fn) => {
 };
 
 export const publish = (topic, message) => {
-  console.log('topic');
-  console.log(subscriptions);
-
   const fns = subscriptions.get(topic);
   fns.forEach((fn) => {
     if (fn) {
