@@ -1,10 +1,18 @@
+import { publish } from './core/pubSub';
+import { OPEN_GALLERY } from './events/constants';
+
 const art = (data, imgBaseUrl) => {
   const sizes = {
     small: 200,
     hd: 843,
+    superHd: 1686,
   };
 
   const imageSize = `full/${sizes.small},/0/default.jpg`;
+  const imageLargeSize = `full/${sizes.hd},/0/default.jpg`;
+  // Falling back to hd because API always redirects for 1686 res
+  const imageRetina = `full/${sizes.hd},/0/default.jpg`;
+
   const imgUrl = `${imgBaseUrl}/${data.image_id}/${imageSize}`;
   let backgroundColorPreview = 'black';
 
@@ -19,6 +27,7 @@ const art = (data, imgBaseUrl) => {
   if (data.image_id) {
     artEl.innerHTML = `
       <img loading=lazy src="${imgUrl}" alt="art titled ${data.title}" />
+      <div class="background"><span class="title">${data.title}</span></div>
     `;
   } else {
     artEl.innerHTML = `
@@ -26,14 +35,22 @@ const art = (data, imgBaseUrl) => {
     `;
   }
 
-  addListener(artEl, data);
+  const imgGalleryUrl = `${imgBaseUrl}/${data.image_id}/${imageLargeSize}`;
+  const imgGalleryRetinaUrl = `${imgBaseUrl}/${data.image_id}/${imageRetina}`;
+
+  onClickArt(artEl, {
+    image: imgGalleryUrl,
+    title: data.title,
+    imageRetina: imgGalleryRetinaUrl,
+    color: backgroundColorPreview,
+  });
 
   return artEl;
 };
 
-function addListener(el, data) {
+function onClickArt(el, data) {
   el.addEventListener('click', () => {
-    console.log('click', data);
+    publish(OPEN_GALLERY, data);
   });
 }
 

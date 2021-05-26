@@ -2,7 +2,11 @@ import { publish, subscribe } from './core/pubSub';
 import { getArtworks } from '../repository/artwork';
 import renderArt from './art';
 import { componentFactory } from './core';
-import { GET_MORE_DATA, GET_MORE_DATA_DONE } from './events/constants';
+import {
+  GET_MORE_DATA,
+  GET_MORE_DATA_DONE,
+  SHOW_ERROR,
+} from './events/constants';
 import { getPage } from './utils/page';
 
 const artgrid = (el) => {
@@ -15,7 +19,7 @@ const artgrid = (el) => {
     publish(GET_MORE_DATA_DONE);
 
     if (error) {
-      return showError(errorMsg);
+      return publish(SHOW_ERROR, errorMsg);
     }
 
     const imgBaseUrl = data.config.iiif_url;
@@ -30,8 +34,6 @@ const artgrid = (el) => {
       inline: 'start',
     });
   }
-
-  function showError(errorMsg) {}
 
   getData();
 };

@@ -7,16 +7,24 @@
     <link rel="stylesheet" href="./index.scss" />
     <title>The Arte</title>
   </head>
-  <body class="p--4 bg--primary">
-    <div class="container bg--primary">
+  <body class="bg--primary relative">
+    <div class="p--4 container bg--primary">
       <h1>The Arte</h1>
       <div class="menu" role="menu">
         <button role="menuitem" data-component="showmore">More Arte</button>
         <div class="loader" data-component="loader">Loading...</div>
       </div>
       <div>
+        <div class="error section hide" data-component="error"></div>
         <section class="artshow section" data-component="artgrid"></section>
       </div>
+    </div>
+    <div class="gallery hide" data-component="gallery">
+      <div class="art-container">
+        <img src="" />
+        <p class="title"></p>
+      </div>
+      <button class="close">Close</button>
     </div>
     <script src="./index.js"></script>
   </body>
