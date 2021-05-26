@@ -18,7 +18,7 @@ const art = (data, imgBaseUrl) => {
 
   if (data.image_id) {
     artEl.innerHTML = `
-      <img loading=lazy src="${imgUrl}" />
+      <img loading=lazy src="${imgUrl}" alt="art titled ${data.title}" />
     `;
   } else {
     artEl.innerHTML = `
